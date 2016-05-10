@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="HeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="269"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEX-hk-guI">
+                    <rect key="frame" x="71" y="175" width="57" height="54"/>
+                    <state key="normal" image="报道.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfk-IP-Mdc">
+                    <rect key="frame" x="138" y="175" width="56" height="54"/>
+                    <state key="normal" image="评测.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-P3-hVk">
+                    <rect key="frame" x="204" y="175" width="57" height="54"/>
+                    <state key="normal" image="导购.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-HF-0Pn">
+                    <rect key="frame" x="271" y="175" width="56" height="54"/>
+                    <state key="normal" image="攻略.png"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Pn-vz-CvO">
+                    <rect key="frame" x="83" y="234" width="48" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评测" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xkq-Xp-qHN">
+                    <rect key="frame" x="146" y="234" width="47" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="导购" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMr-YT-z4Z">
+                    <rect key="frame" x="211" y="234" width="48" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="攻略" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7c-oG-NFG">
+                    <rect key="frame" x="279" y="234" width="48" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddN-iG-TOI">
+                    <rect key="frame" x="0.0" y="0.0" width="337" height="170"/>
+                    <color key="backgroundColor" red="0.10898064565932963" green="0.99371751095035443" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="170" id="XRQ-yw-jZ0"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新闻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rv-FN-Dcn">
+                    <rect key="frame" x="20" y="234" width="48" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="kjQ-Ur-jFI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJf-il-v1r">
+                    <rect key="frame" x="5" y="175" width="56" height="54"/>
+                    <state key="normal" image="新闻.png"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="NEX-hk-guI" firstAttribute="leading" secondItem="HJf-il-v1r" secondAttribute="trailing" constant="10" id="2KF-K5-7uB"/>
+                <constraint firstItem="HJf-il-v1r" firstAttribute="top" secondItem="ddN-iG-TOI" secondAttribute="bottom" constant="5" id="6UE-NI-o8e"/>
+                <constraint firstItem="2rv-FN-Dcn" firstAttribute="top" secondItem="HJf-il-v1r" secondAttribute="bottom" constant="5" id="6b1-1Y-pyW"/>
+                <constraint firstItem="wQE-HF-0Pn" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="8Wz-Ag-ppK"/>
+                <constraint firstAttribute="bottom" secondItem="Xkq-Xp-qHN" secondAttribute="bottom" constant="5" id="FYd-WM-lEi"/>
+                <constraint firstAttribute="bottom" secondItem="r7c-oG-NFG" secondAttribute="bottom" constant="5" id="FbX-rv-kgM"/>
+                <constraint firstItem="1Pn-vz-CvO" firstAttribute="top" secondItem="NEX-hk-guI" secondAttribute="bottom" constant="5" id="Hmr-4e-Ycu"/>
+                <constraint firstItem="fFY-P3-hVk" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="I0q-9q-g6q"/>
+                <constraint firstItem="Xkq-Xp-qHN" firstAttribute="top" secondItem="bfk-IP-Mdc" secondAttribute="bottom" constant="5" id="J7p-2x-irD"/>
+                <constraint firstItem="1Pn-vz-CvO" firstAttribute="leading" secondItem="2rv-FN-Dcn" secondAttribute="trailing" constant="15" id="KK3-y3-dej"/>
+                <constraint firstItem="dMr-YT-z4Z" firstAttribute="top" secondItem="fFY-P3-hVk" secondAttribute="bottom" constant="5" id="KKK-bf-lAQ"/>
+                <constraint firstItem="Xkq-Xp-qHN" firstAttribute="width" secondItem="2rv-FN-Dcn" secondAttribute="width" id="Mtc-K4-63Y"/>
+                <constraint firstItem="ddN-iG-TOI" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="N7P-tN-uAx"/>
+                <constraint firstItem="fFY-P3-hVk" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="NTg-Px-26t"/>
+                <constraint firstItem="NEX-hk-guI" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="Ona-T0-3i9"/>
+                <constraint firstItem="NEX-hk-guI" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="QuK-CL-Jvf"/>
+                <constraint firstItem="1Pn-vz-CvO" firstAttribute="width" secondItem="2rv-FN-Dcn" secondAttribute="width" id="RDv-Kx-2jp"/>
+                <constraint firstItem="wQE-HF-0Pn" firstAttribute="leading" secondItem="fFY-P3-hVk" secondAttribute="trailing" constant="10" id="VC0-ur-xxf"/>
+                <constraint firstItem="fFY-P3-hVk" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="VbO-eW-vYp"/>
+                <constraint firstItem="bfk-IP-Mdc" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="WG5-PP-cLj"/>
+                <constraint firstItem="r7c-oG-NFG" firstAttribute="top" secondItem="wQE-HF-0Pn" secondAttribute="bottom" constant="5" id="WY2-td-mr3"/>
+                <constraint firstAttribute="trailing" secondItem="ddN-iG-TOI" secondAttribute="trailing" id="XZc-c6-Awl"/>
+                <constraint firstItem="wQE-HF-0Pn" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="ak6-te-F1n"/>
+                <constraint firstItem="Xkq-Xp-qHN" firstAttribute="height" secondItem="2rv-FN-Dcn" secondAttribute="height" id="atW-Vx-6dU"/>
+                <constraint firstItem="wQE-HF-0Pn" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="bWm-lG-uQR"/>
+                <constraint firstItem="bfk-IP-Mdc" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="eoX-5q-Pdl"/>
+                <constraint firstAttribute="bottom" secondItem="dMr-YT-z4Z" secondAttribute="bottom" constant="5" id="fOF-o7-Z4W"/>
+                <constraint firstItem="NEX-hk-guI" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="gC2-D9-LH5"/>
+                <constraint firstItem="2rv-FN-Dcn" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="20" id="jqg-X8-SaD"/>
+                <constraint firstAttribute="bottom" secondItem="1Pn-vz-CvO" secondAttribute="bottom" constant="5" id="k1M-ef-w1h"/>
+                <constraint firstItem="fFY-P3-hVk" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="kZe-Zm-2tO"/>
+                <constraint firstItem="bfk-IP-Mdc" firstAttribute="leading" secondItem="NEX-hk-guI" secondAttribute="trailing" constant="10" id="m7v-0T-3DZ"/>
+                <constraint firstItem="r7c-oG-NFG" firstAttribute="height" secondItem="2rv-FN-Dcn" secondAttribute="height" id="mek-me-zPc"/>
+                <constraint firstAttribute="trailing" secondItem="wQE-HF-0Pn" secondAttribute="trailing" constant="10" id="n4A-YS-zus"/>
+                <constraint firstItem="dMr-YT-z4Z" firstAttribute="height" secondItem="2rv-FN-Dcn" secondAttribute="height" id="olC-ga-ikT"/>
+                <constraint firstItem="bfk-IP-Mdc" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="p6f-ic-n9j"/>
+                <constraint firstItem="bfk-IP-Mdc" firstAttribute="width" secondItem="HJf-il-v1r" secondAttribute="width" id="q6q-l3-bAh"/>
+                <constraint firstItem="r7c-oG-NFG" firstAttribute="width" secondItem="2rv-FN-Dcn" secondAttribute="width" id="qJi-0h-5Tw"/>
+                <constraint firstItem="wQE-HF-0Pn" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="qOl-QG-P2H"/>
+                <constraint firstAttribute="trailing" secondItem="r7c-oG-NFG" secondAttribute="trailing" constant="10" id="ri4-Dn-Z5d"/>
+                <constraint firstItem="ddN-iG-TOI" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="sIo-4l-GBh"/>
+                <constraint firstItem="NEX-hk-guI" firstAttribute="height" secondItem="HJf-il-v1r" secondAttribute="height" id="snh-74-L6h"/>
+                <constraint firstItem="1Pn-vz-CvO" firstAttribute="height" secondItem="2rv-FN-Dcn" secondAttribute="height" id="tBb-WF-MAQ"/>
+                <constraint firstItem="dMr-YT-z4Z" firstAttribute="leading" secondItem="Xkq-Xp-qHN" secondAttribute="trailing" constant="18" id="vHw-v7-aAl"/>
+                <constraint firstItem="fFY-P3-hVk" firstAttribute="leading" secondItem="bfk-IP-Mdc" secondAttribute="trailing" constant="10" id="w9T-Su-JJ5"/>
+                <constraint firstItem="r7c-oG-NFG" firstAttribute="leading" secondItem="dMr-YT-z4Z" secondAttribute="trailing" constant="20" id="wBR-AR-EJg"/>
+                <constraint firstItem="dMr-YT-z4Z" firstAttribute="width" secondItem="2rv-FN-Dcn" secondAttribute="width" id="wdW-Oe-v1d"/>
+                <constraint firstItem="HJf-il-v1r" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="5" id="wqr-Fs-VAx"/>
+                <constraint firstAttribute="bottom" secondItem="2rv-FN-Dcn" secondAttribute="bottom" constant="5" id="y54-GC-THq"/>
+                <constraint firstItem="Xkq-Xp-qHN" firstAttribute="leading" secondItem="1Pn-vz-CvO" secondAttribute="trailing" constant="15" id="yZH-rF-ss8"/>
+            </constraints>
+            <connections>
+                <outlet property="buyBtn" destination="fFY-P3-hVk" id="txg-qS-Qjy"/>
+                <outlet property="mainHeadView" destination="ddN-iG-TOI" id="OZv-Yn-chr"/>
+                <outlet property="messageBtn" destination="wQE-HF-0Pn" id="Wbw-th-r0T"/>
+                <outlet property="newsBtn" destination="HJf-il-v1r" id="bYA-F1-gbK"/>
+                <outlet property="reportBtn" destination="NEX-hk-guI" id="HSH-fa-av0"/>
+                <outlet property="testBtn" destination="bfk-IP-Mdc" id="i4P-8y-KXO"/>
+            </connections>
+            <point key="canvasLocation" x="378.5" y="297.5"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="导购.png" width="42" height="42"/>
+        <image name="报道.png" width="42" height="42"/>
+        <image name="攻略.png" width="42" height="42"/>
+        <image name="新闻.png" width="42" height="42"/>
+        <image name="评测.png" width="42" height="42"/>
+    </resources>
+</document>

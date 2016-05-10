@@ -1,0 +1,204 @@
+//
+//  IWatchSystemSettingViewController.m
+//  IWatchTeam
+//
+//  Created by JasonXu on 16/5/2.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchSystemSettingViewController.h"
+//
+#import "IWatchTeamLoginViewController.h"
+//
+#import "IWatchTeamMineViewController.h"
+//
+static NSString *systemCellId = @"systemCellID";
+
+@interface IWatchSystemSettingViewController ()
+{
+}
+@property (nonatomic, strong) UIView *navigationView;
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UILabel *itemTitleLable;
+@end
+
+@implementation IWatchSystemSettingViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //self.navigationItem.title = @"系统设置";
+    
+    self.navigationController.navigationBarHidden = YES;
+    
+//    self.view.backgroundColor = [UIColor lightGrayColor];
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backEvent)];
+//    item.tintColor = [UIColor blackColor];
+//    
+//    self.navigationItem.leftBarButtonItem = item;
+    //
+    [self createData];
+    //
+    [self navigationView];
+    //
+    [self createSettingTabelView];
+    /**
+     *
+     */
+    //_settingTableView.scrollEnabled = NO;
+    //[_settingTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:systemCellId];
+}
+- (UITableView *)createSettingTabelView{
+    
+    if (!_settingTableView) {
+        
+        _settingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, UISCREEN_WIDTH, UISCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _settingTableView.scrollEnabled = NO;
+        _settingTableView.delegate = self;
+        _settingTableView.dataSource = self;
+        _settingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        //
+        [_settingTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:systemCellId];
+        
+        [self.view addSubview:_settingTableView];
+    }
+    return _settingTableView;
+}
+
+//
+- (void)createData{
+    //NSLog(@"SDGASGSDFGASGAS");
+    NSArray *sectionOne = @[@"自动离线图片", @"下次启动时清除列表缓存", @"下次启动时清除图片缓存"];
+    NSArray *sectionTwo = @[@"退出登陆"];
+    [_settingDataSource addObject:sectionOne];
+    [_settingDataSource addObject:sectionTwo];
+}
+//
+#pragma mark -  -
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return _settingDataSource.count;
+}
+//
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [_settingDataSource[section] count];
+}
+//
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    //
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:systemCellId];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.text = _settingDataSource[indexPath.section][indexPath.row];
+    if (1 == indexPath.section && 0 == indexPath.row) {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    }
+
+    return cell;
+}
+//清除记忆密码
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //
+    if (1 == indexPath.section && 0 == indexPath.row) {
+        //先清除记忆的用户名和密码
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        [userDefault removeObjectForKey:@"username"];
+        [userDefault removeObjectForKey:@"password"];
+        [userDefault removeObjectForKey:@"uid"];
+        
+        [userDefault synchronize];
+        //然后调到登陆页面
+        IWatchTeamLoginViewController *loginVC = [[IWatchTeamLoginViewController alloc] init];
+        [self presentViewController:loginVC animated:YES completion:^{
+          
+        }];
+    }
+    //
+}
+//
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20;
+}
+//
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    //
+    //NSIndexPath *index = [tableView indexPathForSelectedRow];
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor lightGrayColor];
+    if (0 == section) {
+        UILabel *title = [[UILabel alloc] init];
+        title.text = @"更多设置";
+        title.font = [UIFont systemFontOfSize:15];
+        title.textColor = [UIColor whiteColor];
+        [view addSubview:title];
+        [title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(view.mas_top).with.offset(0);
+            make.leading.equalTo(view.mas_leading).with.offset(3);
+            make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH, 20));
+        }];
+    }
+    return view;
+}
+//
+//隐藏系统导航栏  自定义导航栏
+- (UIView *)navigationView{
+    
+    _navigationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, VIEW_WIDTH, 64)];
+    //_navigationView.backgroundColor = [UIColor purpleColor];
+    _navigationView.backgroundColor = [UIColor colorWithRed:34/255.0 green:67/255.0 blue:96/255.0 alpha:.8];
+    
+    [self.view addSubview:_navigationView];
+    //返回按钮
+    _backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    //_backButton.backgroundColor = [UIColor redColor];
+    _backButton.layer.cornerRadius = 5;
+    _backButton.clipsToBounds = YES;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"back_white@2x" ofType:@"png"];
+    UIImage *back = [[UIImage imageWithContentsOfFile:path] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [_backButton setBackgroundImage:back forState:UIControlStateNormal];
+    [_backButton addTarget:self action:@selector(backEvent) forControlEvents:UIControlEventTouchUpInside];
+    [_navigationView addSubview:_backButton];
+    
+    //
+    //
+    _itemTitleLable = [[UILabel alloc] init];
+    //_itemTitleLable.backgroundColor = BACKGROUND_COLOR;
+    _itemTitleLable.font = [UIFont systemFontOfSize:15];
+    _itemTitleLable.text = @"系统设置";
+    _itemTitleLable.textAlignment = NSTextAlignmentCenter;
+    [_navigationView addSubview:_itemTitleLable];
+    [_itemTitleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_navigationView).offset(25);
+        make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH/2, 30));
+        make.trailing.equalTo(_navigationView).with.offset(-(UISCREEN_WIDTH - UISCREEN_WIDTH/2)/2);
+    }];
+
+    //__weak typeof(self) WeakSelf = self;
+    //适配button
+    [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_offset(UIEdgeInsetsMake(20, 10, 10, VIEW_WIDTH-53));
+        make.size.mas_equalTo(CGSizeMake(back.size.width, back.size.height));
+    }];
+    
+    return _navigationView;
+}
+//
+
+- (void)backEvent{
+    //
+    [self.navigationController popViewControllerAnimated:YES];
+}
+//
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,46 @@
+//
+//  IWatchTeamMyMessageViewController.m
+//  IWatchTeam
+//
+//  Created by JasonXu on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchTeamMyMessageViewController.h"
+
+@interface IWatchTeamMyMessageViewController ()
+//
+
+@end
+
+@implementation IWatchTeamMyMessageViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor lightTextColor];
+    self.navigationController.navigationBarHidden = YES;
+//    self.navigationItem.title = @"我的私信";
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backEvent)];
+//    item.tintColor = [UIColor blackColor];
+//    self.navigationItem.leftBarButtonItem = item;
+   _itemTitleLable.text = @"我的私信";
+    
+}
+//
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

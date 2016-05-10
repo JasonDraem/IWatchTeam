@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="reportFooter">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5h5-H6-azU">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <state key="normal" title="查看全部原创文章">
+                        <color key="titleColor" red="0.13725490870000001" green="0.73333334920000004" blue="0.89019614459999996" alpha="1" colorSpace="deviceRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="5h5-H6-azU" secondAttribute="bottom" id="0ck-aU-v2a"/>
+                <constraint firstAttribute="trailing" secondItem="5h5-H6-azU" secondAttribute="trailing" id="Flr-50-e3P"/>
+                <constraint firstItem="5h5-H6-azU" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Ne8-jz-T3q"/>
+                <constraint firstItem="5h5-H6-azU" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="UcC-oF-DpT"/>
+            </constraints>
+            <connections>
+                <outlet property="footerBtn" destination="5h5-H6-azU" id="r4N-rN-yBo"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>

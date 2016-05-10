@@ -1,0 +1,187 @@
+//
+//  IWatchTeamForumViewController.m
+//  IWatchTeam
+//
+//  Created by JasonXu on 16/4/30.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchTeamForumViewController.h"
+#import "ZFKForumCollectionViewCell.h"
+#import "AFNetworking.h"
+#import "ZFKForumCollectionReusableView.h"
+#import "IWatchTeamGetDataFactory.h"
+#import "ZFKForumModel.h"
+#define FORUM_URL @"http://www.iwatch365.com/json/iphone/json.php?t=1"
+
+static NSString *identifier = @"head";
+
+@interface IWatchTeamForumViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+{
+    int _page;
+    UICollectionView *_collectionView;
+    NSMutableArray *_dataArray;
+}
+
+@end
+
+@implementation IWatchTeamForumViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self dataArray];
+    [self getData];
+    [self createCollectionview];
+}
+
+//懒加载
+-(NSMutableArray *)dataArray{
+    
+    if (_dataArray==nil) {
+        _dataArray=[[NSMutableArray alloc]init];
+    }
+    return _dataArray;
+}
+
+#pragma mark -获取数据-
+-(void)getData{
+    IWatchTeamGetDataFactory *mgr = [IWatchTeamGetDataFactory AFShareManager];
+    [mgr GET:FORUM_URL param:nil success:^(NSData *data) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        NSArray *array = dict[@"data"];
+        NSMutableArray*arr1 = [[NSMutableArray alloc]init];
+        NSMutableArray*arr2 = [[NSMutableArray alloc]init];
+        NSMutableArray*arr3 = [[NSMutableArray alloc]init];
+        NSMutableArray*arr4 = [[NSMutableArray alloc]init];
+        NSMutableArray*arr5 = [[NSMutableArray alloc]init];
+        NSMutableArray*arr6 = [[NSMutableArray alloc]init];
+        
+        for (NSDictionary *dict1 in array) {
+            if ([dict1[@"fup"]isEqualToString:@"8"]) {
+                ZFKForumModel *model = [[ZFKForumModel alloc]initWithDictionary:dict1 error:nil];
+                [arr1 addObject:model];
+//                [_dataArray addObject:arr1];
+            }
+            if ([dict1[@"fup"]isEqualToString:@"34"]) {
+                ZFKForumModel *model = [[ZFKForumModel alloc]initWithDictionary:dict1 error:nil];
+                [arr2 addObject:model];
+//                        [_dataArray addObject:arr2];
+            }
+            if ([dict1[@"fup"]isEqualToString:@"44"]) {
+                ZFKForumModel *model = [[ZFKForumModel alloc]initWithDictionary:dict1 error:nil];
+                [arr3 addObject:model];
+//                        [_dataArray addObject:arr3];
+            }
+            if ([dict1[@"fup"]isEqualToString:@"236"]) {
+                ZFKForumModel *model = [[ZFKForumModel alloc]initWithDictionary:dict1 error:nil];
+                [arr4 addObject:model];
+//                        [_dataArray addObject:arr4];
+            }
+            if ([dict1[@"fup"]isEqualToString:@"56"]) {
+                ZFKForumModel *model = [[ZFKForumModel alloc]initWithDictionary:dict1 error:nil];
+                [arr5 addObject:model];
+//                        [_dataArray addObject:arr5];
+            }
+            
+            if ([dict1[@"fup"]isEqualToString:@"108"]) {
+                ZFKForumModel *model = [[ZFKForumModel alloc]initWithDictionary:dict1 error:nil];
+                [arr6 addObject:model];
+//                        [_dataArray addObject:arr6];
+            }
+
+        }
+        [_dataArray addObject:arr1];
+        [_dataArray addObject:arr2];
+        [_dataArray addObject:arr3];
+        [_dataArray addObject:arr4];
+        [_dataArray addObject:arr5];
+        [_dataArray addObject:arr6];
+        [_collectionView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+#pragma mark -创建collectionView-
+-(void)createCollectionview{
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.minimumLineSpacing = 5;
+    //    设置列间距
+    layout.minimumInteritemSpacing = 5;
+    //    设置item的大小
+    layout.itemSize = CGSizeMake(self.view.frame.size.width/2-5, 50);
+    _collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
+    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    [self.view addSubview:_collectionView];
+    UINib *nib = [UINib nibWithNibName:@"ZFKForumCollectionViewCell" bundle:nil];
+    [_collectionView registerNib:nib forCellWithReuseIdentifier:@"ZFKForumCollectionViewCell"];
+    
+    [_collectionView registerClass:[ZFKForumCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:identifier];
+}
+#pragma  mark - collectionview datasource
+//返回有几组
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return _dataArray.count;
+}
+//返回每组有多少个
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [_dataArray[section] count];
+}
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    //    1.设置标识
+    static NSString *identifier = @"ZFKForumCollectionViewCell";
+    //    2.从复用池中取
+    ZFKForumCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+//    ZFKForumModel *model = _dataArray[indexPath.section][indexPath.row];
+    cell.model = _dataArray[indexPath.section][indexPath.row];
+    return cell;
+}
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        
+        //static NSString *identifier = @"head";
+        ZFKForumCollectionReusableView *headerView = [_collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:identifier forIndexPath:indexPath];
+        
+        if (indexPath.section==0) {
+            headerView.title=@"顶级奢华品牌专区";
+        }
+        if (indexPath.section==1) {
+            headerView.title=@"经典奢华品牌";
+        }
+        if (indexPath.section==2) {
+            headerView.title=@"经典豪华品牌";
+        }
+        if (indexPath.section==3) {
+            headerView.title=@"智能手表论坛";
+        }
+        if (indexPath.section==4) {
+            headerView.title=@"平易近人的传统品牌";
+        }
+        if (indexPath.section==5) {
+            headerView.title=@"爱表族 . 表 . 生活";
+        }
+        
+        return headerView;
+        
+    }
+    return nil;
+    
+}
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    //    横向滚动时，只需要写X
+    //    纵向滚动时，只需要写Y
+    return CGSizeMake(0, 30);
+}
+
+@end
+
+
+
+
+
+
+
+

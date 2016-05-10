@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="89" id="KGk-i7-Jjw" customClass="ZFKForumTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps7-2V-y45">
+                        <rect key="frame" x="5" y="5" width="340" height="25"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="p87-WY-VcA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crf-rf-uw3">
+                        <rect key="frame" x="55" y="58" width="60" height="25"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="629-nP-0ag"/>
+                            <constraint firstAttribute="width" constant="60" id="Mfu-M8-Tcr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="341-Do-scP">
+                        <rect key="frame" x="125" y="58" width="40" height="25"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="ICJ-GX-rSd"/>
+                            <constraint firstAttribute="width" constant="40" id="yqG-v6-69n"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comments_26.777777777778px_1186033_easyicon.net.png" translatesAutoresizingMaskIntoConstraints="NO" id="ASt-CV-Nvg">
+                        <rect key="frame" x="290" y="58" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="G69-rn-X0D"/>
+                            <constraint firstAttribute="width" constant="25" id="R7K-mj-Pre"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击量" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lo4-tp-WnF">
+                        <rect key="frame" x="215" y="58" width="60" height="25"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="0sb-qv-ewd"/>
+                            <constraint firstAttribute="width" constant="60" id="YuX-yr-kpx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评论" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sg1-Sf-KVO">
+                        <rect key="frame" x="330" y="58" width="45" height="25"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="D1Y-2p-bKA"/>
+                            <constraint firstAttribute="width" constant="45" id="YUs-j0-Gxp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noLogin.png" translatesAutoresizingMaskIntoConstraints="NO" id="YHB-Ky-PGa">
+                        <rect key="frame" x="5" y="48" width="40" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="SXm-x0-SiG"/>
+                            <constraint firstAttribute="width" constant="40" id="sug-F6-EtC"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cursor_Click_24px_1177473_easyicon.net.png" translatesAutoresizingMaskIntoConstraints="NO" id="TgV-0Y-MfD">
+                        <rect key="frame" x="185" y="58" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="mFz-MR-8ca"/>
+                            <constraint firstAttribute="width" constant="25" id="vHu-x5-bmz"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="lo4-tp-WnF" secondAttribute="bottom" constant="5" id="6Am-CI-M8q"/>
+                    <constraint firstAttribute="bottom" secondItem="Sg1-Sf-KVO" secondAttribute="bottom" constant="5" id="PMp-qR-upk"/>
+                    <constraint firstItem="ps7-2V-y45" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Wns-VM-hU1"/>
+                    <constraint firstAttribute="bottom" secondItem="341-Do-scP" secondAttribute="bottom" constant="5" id="blC-Ru-9Na"/>
+                    <constraint firstItem="lo4-tp-WnF" firstAttribute="leading" secondItem="TgV-0Y-MfD" secondAttribute="trailing" constant="5" id="d8y-AH-DaJ"/>
+                    <constraint firstAttribute="bottom" secondItem="crf-rf-uw3" secondAttribute="bottom" constant="5" id="gyY-eM-qTW"/>
+                    <constraint firstAttribute="bottom" secondItem="ASt-CV-Nvg" secondAttribute="bottom" constant="5" id="hTr-Sz-JcJ"/>
+                    <constraint firstItem="ps7-2V-y45" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="iRu-Y2-kcn"/>
+                    <constraint firstAttribute="bottom" secondItem="YHB-Ky-PGa" secondAttribute="bottom" constant="5" id="m1X-HL-Ky4"/>
+                    <constraint firstAttribute="bottom" secondItem="TgV-0Y-MfD" secondAttribute="bottom" constant="5" id="nll-Kv-znR"/>
+                    <constraint firstItem="crf-rf-uw3" firstAttribute="leading" secondItem="YHB-Ky-PGa" secondAttribute="trailing" constant="10" id="rSP-sg-BnH"/>
+                    <constraint firstItem="YHB-Ky-PGa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="wgb-Ah-f6A"/>
+                    <constraint firstItem="Sg1-Sf-KVO" firstAttribute="leading" secondItem="ASt-CV-Nvg" secondAttribute="trailing" constant="15" id="wwE-jl-4cB"/>
+                    <constraint firstItem="TgV-0Y-MfD" firstAttribute="leading" secondItem="341-Do-scP" secondAttribute="trailing" constant="20" id="y8a-hZ-kzA"/>
+                    <constraint firstItem="341-Do-scP" firstAttribute="leading" secondItem="crf-rf-uw3" secondAttribute="trailing" constant="10" id="yfz-TF-i7D"/>
+                    <constraint firstItem="ASt-CV-Nvg" firstAttribute="leading" secondItem="lo4-tp-WnF" secondAttribute="trailing" constant="15" id="z3l-0o-gW9"/>
+                    <constraint firstAttribute="trailing" secondItem="ps7-2V-y45" secondAttribute="trailing" constant="30" id="zJC-bL-Kum"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ClickLabel" destination="lo4-tp-WnF" id="lTP-d1-aXH"/>
+                <outlet property="IconImage" destination="YHB-Ky-PGa" id="tfF-nV-I50"/>
+                <outlet property="TimeLabel" destination="341-Do-scP" id="IvE-vp-mFS"/>
+                <outlet property="UserName" destination="crf-rf-uw3" id="ugD-ft-vAa"/>
+                <outlet property="commentLabel" destination="Sg1-Sf-KVO" id="T55-pu-fQH"/>
+                <outlet property="titleLabel" destination="ps7-2V-y45" id="pb7-AU-kto"/>
+            </connections>
+            <point key="canvasLocation" x="-15.5" y="228.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Cursor_Click_24px_1177473_easyicon.net.png" width="20" height="20"/>
+        <image name="comments_26.777777777778px_1186033_easyicon.net.png" width="26" height="23"/>
+        <image name="noLogin.png" width="48" height="48"/>
+    </resources>
+</document>

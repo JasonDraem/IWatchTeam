@@ -1,0 +1,151 @@
+//
+//  IWatchTeamMyCollectionViewController.m
+//  IWatchTeam
+//
+//  Created by JasonXu on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchTeamMyCollectionViewController.h"
+//
+#import "IWatchTeamCollectionTZViewController.h"
+#import "IWatchTeamCollectonWatchViewController.h"
+
+@interface IWatchTeamMyCollectionViewController ()<UIScrollViewDelegate>
+
+@property (nonatomic, strong) UISegmentedControl *headerSegment;
+//
+@property (nonatomic, strong) UIScrollView *iWatchScrollView;
+
+@end
+
+@implementation IWatchTeamMyCollectionViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //
+    [self headerSegment];
+    //
+    [self iWatchScrollView];
+    //
+    [self addSubViewControllers];
+}
+//
+//隐藏系统导航栏  自定义导航栏
+- (UIView *)navigationView{
+    //
+    [super navigationView];
+    _itemTitleLable.hidden = YES;
+    
+    return _navigationView;
+}
+//
+- (UISegmentedControl *)headerSegment{
+    
+    if (!_headerSegment) {
+        
+        _headerSegment = [[UISegmentedControl alloc] initWithItems:@[@"收藏的帖子", @"收藏的腕表"]];
+        _headerSegment.selectedSegmentIndex = 0;
+        //_headerSegment.frame = CGRectMake(UISCREEN_WIDTH/3, 10, UISCREEN_WIDTH/3, 30);
+        //_headerSegment.center = self.navigationController.navigationBar.center;
+        //设置着色(字体、边框、选中)
+        _headerSegment.tintColor = [UIColor lightGrayColor];
+        
+        //设置操作是否是暂时的
+        //_headerSegment.momentary = YES;
+        //设置标题属性
+        [_headerSegment setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13],NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+        //
+        [_headerSegment setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],NSForegroundColorAttributeName:[UIColor blackColor]} forState:UIControlStateSelected];
+        
+        [_headerSegment addTarget:self action:@selector(clickHandle:) forControlEvents:UIControlEventValueChanged];
+        
+        //设置宽度，没有设置的段平均分
+        //[_headerSegment setWidth:65 forSegmentAtIndex:1];
+        
+        [_navigationView addSubview:_headerSegment];
+        //
+        [_headerSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_navigationView).offset(25);
+            //make.center.equalTo(_navigationView);
+            make.trailing.equalTo(_navigationView).offset(-UISCREEN_WIDTH/3);
+            make.size.mas_equalTo(CGSizeMake(UISCREEN_WIDTH/3, 30));
+        }];
+    }
+    return _headerSegment;
+}
+//
+//
+- (UIScrollView *)iWatchScrollView{
+    //
+    if (!_iWatchScrollView) {
+        
+        _iWatchScrollView = [[UIScrollView alloc] init];
+        _iWatchScrollView.frame = CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEITHT - 64);
+        _iWatchScrollView.backgroundColor = BACKGROUND_COLOR;
+        _iWatchScrollView.bounces = NO;
+        //
+        _iWatchScrollView.pagingEnabled = YES;
+        _iWatchScrollView.delegate = self;
+        _iWatchScrollView.showsHorizontalScrollIndicator = NO;
+        _iWatchScrollView.directionalLockEnabled = YES;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        _iWatchScrollView.contentSize = CGSizeMake(VIEW_WIDTH*2, VIEW_HEITHT);
+        
+        [self.view addSubview:_iWatchScrollView];
+    }
+    return _iWatchScrollView;
+}
+#pragma mark -  -
+//
+- (void)addSubViewControllers{
+    
+    IWatchTeamCollectionTZViewController * myTZVC = [[IWatchTeamCollectionTZViewController alloc] init];
+    
+    IWatchTeamCollectonWatchViewController *myWatchVC = [[IWatchTeamCollectonWatchViewController alloc] init];
+    //
+    [self addChildViewController:myTZVC];
+    [self addChildViewController:myWatchVC];
+    //
+    [_iWatchScrollView addSubview:myTZVC.view];
+    [_iWatchScrollView addSubview:myWatchVC.view];
+    //设置位置
+    CGRect responderRect = myWatchVC.view.frame;
+    responderRect.size.height = CGRectGetHeight(_iWatchScrollView.frame);
+    myWatchVC.view.frame = responderRect;
+}
+#pragma mark - Scrollview delegate
+//
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat offSetX = scrollView.contentOffset.x;
+    NSInteger ratio = round(offSetX / UISCREEN_WIDTH);
+    _headerSegment.selectedSegmentIndex = ratio;
+}
+
+//
+- (void)clickHandle:(UISegmentedControl *)sc{
+    
+    NSInteger index = sc.selectedSegmentIndex;
+    CGRect frame = _iWatchScrollView.frame;
+    frame.origin.x = index * CGRectGetWidth(_iWatchScrollView.frame);
+    frame.origin.y = 0;
+    [_iWatchScrollView scrollRectToVisible:frame animated:YES];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

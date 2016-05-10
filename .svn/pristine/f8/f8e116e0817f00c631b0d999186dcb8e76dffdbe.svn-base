@@ -1,0 +1,33 @@
+//
+//  ZFKForumTableViewCell.m
+//  IWatchTeam
+//
+//  Created by qianfeng on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "ZFKForumTableViewCell.h"
+#import "ZFKForumTableViewModel.h"
+#import <UIImageView+WebCache.h>
+@interface ZFKForumTableViewCell()
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *IconImage;
+@property (weak, nonatomic) IBOutlet UILabel *UserName;
+@property (weak, nonatomic) IBOutlet UILabel *TimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ClickLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+
+@end
+@implementation ZFKForumTableViewCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

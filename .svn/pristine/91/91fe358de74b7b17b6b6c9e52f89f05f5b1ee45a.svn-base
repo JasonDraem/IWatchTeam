@@ -1,0 +1,59 @@
+//
+//  ReportCollectionViewCell.m
+//  IWatchTeam
+//
+//  Created by 丶苹果 on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "ReportCollectionViewCell.h"
+
+#import "UIImageView+WebCache.h"
+
+#import "reportModel.h"
+
+
+@interface ReportCollectionViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
+
+@end
+
+@implementation ReportCollectionViewCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+//- (void)setModel:(reportModel *)model
+//{
+//    _model = model;
+//    
+//    _titleView.text = _model.title;
+//    
+//    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.thumb] placeholderImage:[UIImage imageNamed:@""]];
+//    
+//    _iconImageView.layer.cornerRadius = 8;
+//    _iconImageView.layer.masksToBounds = YES;
+//    
+//}
+- (void)updateWithModel:(reportModel *)model{
+        _titleView.text = model.title;
+    
+        [_iconImageView sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:@""]];
+    
+        _iconImageView.layer.cornerRadius = 8;
+        _iconImageView.layer.masksToBounds = YES;
+}
+
+
+- (void)setTitle:(NSString *)title
+{
+    
+}
+
+
+@end

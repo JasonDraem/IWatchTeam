@@ -1,0 +1,17 @@
+//
+//  IWatchTeamPricesZDHCollectionViewCell.m
+//  IWatchTeam
+//
+//  Created by qianfeng on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchTeamPricesZDHCollectionViewCell.h"
+
+@implementation IWatchTeamPricesZDHCollectionViewCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+@end

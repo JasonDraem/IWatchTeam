@@ -1,0 +1,127 @@
+//
+//  IWatchTeamGetDataFactory.m
+//  IWatchTeam
+//
+//  Created by Jason on 16/5/3.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchTeamGetDataFactory.h"
+
+#import <AFNetworking/AFNetworking.h>
+//
+//
+#import "LoginUserModel.h"
+#import "IWatchLoginSuccessModel.h"
+
+@implementation IWatchTeamGetDataFactory
+//
+{
+    AFHTTPSessionManager *_AFSessionManger;
+}
++ (instancetype)AFShareManager{
+    //
+    static IWatchTeamGetDataFactory *downloader = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        downloader = [[IWatchTeamGetDataFactory alloc] init];
+    });
+    return downloader;
+}
+//
+- (instancetype)init{
+    if (self = [super init]) {
+        _AFSessionManger = [AFHTTPSessionManager manager];
+        _AFSessionManger.responseSerializer = [AFHTTPResponseSerializer serializer];
+    }
+    return self;
+}
+/**
+ *  登陆接口
+ *
+ *  @param url           登陆url
+ *  @param para          无需拼接参数
+ *  @param progressEvect 登陆过程事件
+ *  @param BackResult    返回请求数据
+ */
+- (void)AFGetData:(NSString *)url parameters:(id)para progress:(ActionBlock)progressEvect resultHandle:(GetData)BackResult{
+    
+    NSError *error = nil;
+    //
+    [_AFSessionManger GET:url parameters:para progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        //
+        //NSString *str = dic[@"success"];
+        //NSString *failed = dic[@"reason"];
+        //
+        LoginUserModel *loginModel = [[LoginUserModel alloc] init];
+        loginModel.Login_success = dic[@"success"];
+        loginModel.Login_reason = dic[@"reason"];
+        loginModel.Login_uid = dic[@"uid"];
+        //
+        BackResult(loginModel, error);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //
+        BackResult(nil, error);
+    }];
+}
+//
+
+//WW
+- (void)GET:(NSString *)url param:(NSDictionary *)para success:(Success)success failure:(Failure)failure
+{
+    [_AFSessionManger GET:url parameters:para progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+- (void)POST:(NSString *)url param:(NSDictionary *)para success:(Success)success failure:(Failure)failure
+{
+    [_AFSessionManger GET:url parameters:para progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+//
+- (void)JSGetLoginData:(NSString *)url parameters:(id)para resultHandle:(GetData)backResult{
+    [_AFSessionManger GET:url parameters:para progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //
+        NSError *error;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
+        if (!error) {
+            IWatchLoginSuccessModel *model = [[IWatchLoginSuccessModel alloc] init];
+            
+            model.number = dic[@"success"];
+            
+            NSArray *dataArray = dic[@"data"];
+            NSDictionary * detailDic = dataArray[0];
+            
+            model.username = detailDic[@"username"];
+            model.extcredits1 = detailDic[@"extcredits1"];
+            model.extcredits2 = detailDic[@"extcredits2"];
+            model.extcredits3 = detailDic[@"extcredits3"];
+            model.credits = detailDic[@"credits"];
+            model.posts = detailDic[@"posts"];
+            model.digestposts = detailDic[@"digestposts"];
+            model.uid = detailDic[@"uid"];
+            model.grouptitle = detailDic[@"grouptitle"];
+            backResult(model, nil);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        backResult(nil, nil);
+    }];
+}
+@end

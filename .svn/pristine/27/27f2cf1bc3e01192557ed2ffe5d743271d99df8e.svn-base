@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "930f3eb7-13b8-4b2c-83aa-05eaabc6be12++843",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "930f3eb7-13b8-4b2c-83aa-05eaabc6be12++843" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "930f3eb7-13b8-4b2c-83aa-05eaabc6be12++843" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9D04A71B-196C-47D8-886F-77F8E0A1CB21",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "930f3eb7-13b8-4b2c-83aa-05eaabc6be12++843" : "IWatchTeam\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "IWatchTeam",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "IWatchTeam.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/10.8.157.15",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "930f3eb7-13b8-4b2c-83aa-05eaabc6be12++843"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+//
+//  ZFKForumViewController.m
+//  IWatchTeam
+//
+//  Created by qianfeng on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "ZFKForumViewController.h"
+#define FORUM_URL @"http://www.iwatch365.com/json/iphone/json.php?t=7&fid=%d&p=%d"
+
+@interface ZFKForumViewController ()
+
+@end
+
+@implementation ZFKForumViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+
+
+
+
+@end

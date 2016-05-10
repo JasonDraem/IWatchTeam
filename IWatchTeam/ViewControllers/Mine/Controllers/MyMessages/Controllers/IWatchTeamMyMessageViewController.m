@@ -1,0 +1,169 @@
+//
+//  IWatchTeamMyMessageViewController.m
+//  IWatchTeam
+//
+//  Created by JasonXu on 16/5/6.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchTeamMyMessageViewController.h"
+
+#import <MJRefresh/MJRefresh.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+
+#import "IWatchTeamGetDataFactory.h"
+#import "URLHeader.h"
+#import "IWatchTeamMessageModel.h"
+
+static NSString *cellId = @"messageCellID";
+
+//#define WeakSelf(weakSelf) __weak __typeof(&*self) weakSelf = self;
+
+@interface IWatchTeamMyMessageViewController ()<UITableViewDataSource, UITableViewDelegate>
+//
+@property (nonatomic, copy) NSString *message_fid;
+@property (nonatomic, strong) UITableView *messageTabelView;
+@property (nonatomic, strong) NSMutableArray *messageDataSource;
+//
+@end
+
+@implementation IWatchTeamMyMessageViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    //
+    self.view.backgroundColor = [UIColor lightTextColor];
+    self.navigationController.navigationBarHidden = YES;
+    _itemTitleLable.text = @"我的私信";
+    //
+    [self messageDataSource];
+    //
+    [self messageTabelView];
+}
+//
+- (NSMutableArray *)messageDataSource{
+    if (!_messageDataSource) {
+        _messageDataSource = [[NSMutableArray alloc] init];
+    }
+    return _messageDataSource;
+}
+//
+- (UITableView *)messageTabelView{
+    if (!_messageTabelView) {
+        _messageTabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, VIEW_WIDTH, VIEW_HEITHT - 64) style:UITableViewStylePlain];
+        //
+        _messageTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _messageTabelView.dataSource = self;
+        _messageTabelView.delegate = self;
+        //
+        [_messageTabelView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellId];
+        //
+        [self.view addSubview:_messageTabelView];
+        //
+        WeakSelf(weakSelf)
+        MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weakSelf getMessageData:NO];
+        }];
+        _messageTabelView.mj_header = header;
+        //
+        MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [weakSelf getMessageData:YES];
+        }];
+        //
+        _messageTabelView.mj_footer = footer;
+        [_messageTabelView.mj_header beginRefreshing];
+    }
+    return _messageTabelView;
+}
+//
+- (void)getMessageData:(BOOL)isLoadingMore{
+    WeakSelf(weakSelf)
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    
+    //
+    NSInteger currentPage = 1;
+    
+    if (isLoadingMore) {
+        if (0 == _messageDataSource.count %10) {
+            currentPage = _messageDataSource.count / 10;
+        }else{
+            [_messageTabelView.mj_footer endRefreshing];
+            return;
+        }
+    }
+    ////http://www.iwatch365.com/json/iphone/json.php?t=201&fid=1265983&p=1
+    NSUserDefaults *messDefaults = [NSUserDefaults standardUserDefaults];
+    self.message_fid = [messDefaults objectForKey:@"uid"];
+    NSMutableString *urlStr = [[NSMutableString alloc] init];
+    [urlStr appendFormat:@"%@%@", IWATCH_DOMAINNAME, IWATCH_TRIPPRO];
+    [urlStr appendFormat:@"%@", IWATCH_MYMESSAGE];
+    [urlStr appendFormat:@"%@", self.message_fid];
+    //&p=1
+    [urlStr appendFormat:@"&p=%ld", currentPage];
+    //
+    [[IWatchTeamGetDataFactory AFShareManager] JSGetMyMessageData:urlStr backResult:^(IWatchTeamMessageModel *model, NSArray * arr, NSError *error) {
+        NSLog(@"7777777777777%@%ld", model.message_Success, arr.count);
+        if (!error) {
+            //
+            if (!isLoadingMore) {
+                [_messageDataSource removeAllObjects];
+                [_messageTabelView reloadData];
+            }
+            //
+            if (1 == [model.message_Success integerValue]) {
+                
+                if (0 != arr.count) {
+                    hud.labelText = @"加载中";
+                    [hud hide:YES afterDelay:1.0];
+                    [_messageDataSource addObject:model];
+                    [_messageTabelView reloadData];
+                }else if(0 == arr.count) {
+                    
+                    hud.labelText = @"暂时没有未读私信";
+                    
+                    [hud hide:YES afterDelay:1.0];
+                    //
+                    isLoadingMore ? [_messageTabelView.mj_footer endRefreshing] : [_messageTabelView.mj_header endRefreshing];
+                    return ;
+                }
+                
+            }
+            //
+        }else{
+            [_messageTabelView reloadData];
+            isLoadingMore ? [_messageTabelView.mj_footer endRefreshing] : [_messageTabelView.mj_header endRefreshing];
+        }
+        //
+    }];
+}
+
+#pragma mark -   -
+//
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _messageDataSource.count;
+}
+//
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    
+    
+    return cell;
+}
+//
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

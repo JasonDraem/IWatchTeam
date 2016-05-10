@@ -1,0 +1,170 @@
+//
+//  IWatchRootViewController.m
+//  IWatchTeam
+//
+//  Created by JasonXu on 16/4/30.
+//  Copyright © 2016年 Jason. All rights reserved.
+//
+
+#import "IWatchRootViewController.h"
+//
+#import "IWatchTeamTabBarController.h"
+#import "IWacthAlertFactory.h"
+//
+#import "IWatchNetStatues.h"
+
+#define GUIDESCROLLVIEW_BOUNDS_SIZE _guideScrollView.bounds.size
+
+@interface IWatchRootViewController ()<UIScrollViewDelegate>
+//
+@property (nonatomic, strong) UIScrollView *guideScrollView;
+
+@end
+
+@implementation IWatchRootViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor lightTextColor];
+    //
+    //[self setAttributes];
+    [self createScrollView];
+}
+//
+- (void)setAttributes{
+    //设置网络状态监测
+    //[IWatchNetStatues MonitorNetStatues:self];
+    //
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        IWatchTeamTabBarController *TBC = [[IWatchTeamTabBarController alloc] init];
+        self.view.window.rootViewController = TBC;
+    });
+}
+//
+- (UIScrollView *)createScrollView{
+    
+    if (!_guideScrollView) {
+        
+        _guideScrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        //
+        _guideScrollView.showsHorizontalScrollIndicator = NO;
+        
+        //CGSize XXYScroll_BOUNDS_SIZE = _guideScrollView.bounds.size;
+        
+        for (NSInteger i = 0; i < 5; i ++) {
+            
+            NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"guide_%ld", i + 1] ofType:@"png"];
+            
+            UIImage *image = [UIImage imageWithContentsOfFile:path];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * GUIDESCROLLVIEW_BOUNDS_SIZE.width, 0, GUIDESCROLLVIEW_BOUNDS_SIZE.width, GUIDESCROLLVIEW_BOUNDS_SIZE.height)];
+            imageView.image = image;
+            //最后一张有一个开始体验按钮
+            if (i == 4) {
+                //NSLog(@"11111111第五种");
+                //                //
+                UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+                //button.bounds = CGRectMake(0, 0, 100, 50);
+                //button.center = self.view.center;
+                
+                button.frame = CGRectMake(VIEW_WIDTH/2 - 90, VIEW_HEITHT - 100, 200, 50);
+                button.backgroundColor = [UIColor lightTextColor];
+                button.layer.cornerRadius = 15;
+                
+                [button setTitle:@"进入" forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                
+                [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [imageView addSubview:button];
+                
+                //打开用户交互
+                imageView.userInteractionEnabled = YES;
+            }
+            [_guideScrollView addSubview:imageView];
+        }
+        _guideScrollView.contentSize = CGSizeMake(5*GUIDESCROLLVIEW_BOUNDS_SIZE.width, GUIDESCROLLVIEW_BOUNDS_SIZE.height);
+        _guideScrollView.bounces = NO;
+        //
+        _guideScrollView.pagingEnabled = YES;
+        _guideScrollView.delegate = self;
+        [self.view addSubview:_guideScrollView];
+        
+        //页码指示器
+        UIPageControl *pageControl  = [[UIPageControl alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-30, self.view.bounds.size.width, 30)];
+        pageControl.pageIndicatorTintColor = [UIColor grayColor];
+        pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
+        //pageControl.backgroundColor = [UIColor blackColor];
+        //设置小白球的个数
+        pageControl.numberOfPages = 5;
+        //设置小白球的颜色和当前小白球的颜色
+        //pageControl.pageIndicatorTintColor = [UIColor blueColor];
+        //pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+        pageControl.tag = 301;
+        [pageControl addTarget:self action:@selector(pageClick:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:pageControl];
+    }
+    
+    return _guideScrollView;
+}
+//
+//页码指示器的 页码 改变的时候调用
+- (void)pageClick:(UIPageControl *)page {
+    //修改滚动视图的内容偏移量 (内容就会滚动)
+    //滚动 偏移 一页
+    //_scrollView.contentOffset = CGPointMake(page.currentPage*_scrollView.bounds.size.width, 0);
+    //内容偏移带滚动动画
+    //[_scrollView setContentOffset:CGPointMake(page.currentPage*_scrollView.bounds.size.width, 0) animated:YES];
+    //或者使内容滚动到可见位置
+    [_guideScrollView scrollRectToVisible:CGRectMake(page.currentPage*_guideScrollView.bounds.size.width, 0, _guideScrollView.bounds.size.width, _guideScrollView.bounds.size.height) animated:YES];
+}
+//
+- (void)btnClick:(UIButton *)button {
+    //跳转到真正的app 界面
+    IWatchTeamTabBarController *TBC = [[IWatchTeamTabBarController alloc] init];
+    self.view.window.rootViewController = TBC;
+}
+//
+#pragma mark -  -
+//减速停止的时候调用
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    //减速停止 算出 当前的页码
+    UIPageControl *page = (UIPageControl *)[self.view viewWithTag:301];
+    //内容偏移量/宽---》当前页码
+    //修改当前页码
+    page.currentPage = scrollView.contentOffset.x/scrollView.bounds.size.width;
+    //自动跳转
+    if (4 == page.currentPage) {
+        
+        [IWacthAlertFactory autmicDismisAlertWithTitle:nil withMessage:@"3秒后自动进入或者点击进入页面" onView:self];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //NSLog(@"222222222第五种");
+            
+
+            //跳转到真正的app 界面
+            IWatchTeamTabBarController *TBC = [[IWatchTeamTabBarController alloc] init];
+            self.view.window.rootViewController = TBC;
+            
+        });
+    }
+}
+
+
+
+//
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
