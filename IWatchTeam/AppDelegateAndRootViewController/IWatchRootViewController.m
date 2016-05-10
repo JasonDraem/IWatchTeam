@@ -65,7 +65,7 @@
                 UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
                 //button.bounds = CGRectMake(0, 0, 100, 50);
                 //button.center = self.view.center;
-                
+                //
                 button.frame = CGRectMake(VIEW_WIDTH/2 - 90, VIEW_HEITHT - 100, 200, 50);
                 button.backgroundColor = [UIColor lightTextColor];
                 button.layer.cornerRadius = 15;
